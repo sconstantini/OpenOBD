@@ -1,0 +1,137 @@
+{
+  "versao": 3,
+  "veiculo": {
+    "marca": "Marca Exemplo",
+    "modelo": "Carro Genérico",
+    "ano": 2020,
+    "modelo_3d": null
+  },
+  "leituras": {
+    "registros": []
+  },
+  "adaptador": {
+    "tipo": "bluetooth_classico",
+    "nome_esperado": "OBDII"
+  },
+  "plano": {
+    "exemplo": true,
+    "origem": { "documento": "Plano fictício do Carro Genérico", "mercado": "Exemplo" },
+    "opcoes": {
+      "transmissao": { "nome": "Câmbio", "valores": { "manual": "Manual", "automatica": "Automático" } }
+    },
+    "sistemas": [
+      {
+        "id": "motor",
+        "nome": "Motor",
+        "componentes": [
+          {
+            "id": "oleo_motor",
+            "nome": "Óleo do motor",
+            "para_que_serve": "Lubrifica e ajuda a resfriar as peças internas do motor.",
+            "especificacao": null,
+            "origem": { "pagina": 1, "item": 1 },
+            "ancora": [0, 0.1, 0.72],
+            "servicos": [
+              {
+                "id": "oleo_motor.substituir",
+                "acao": "substituir",
+                "descricao": "Substituir o óleo",
+                "regras": {
+                  "normal": { "tipo": "intervalo", "km": 10000, "meses": 12 },
+                  "severo": { "tipo": "intervalo", "km": 5000, "meses": 6 }
+                }
+              }
+            ]
+          },
+          {
+            "id": "correia",
+            "nome": "Correia de acessórios",
+            "para_que_serve": "Transmite o giro do motor ao alternador e a outros acessórios.",
+            "especificacao": null,
+            "origem": { "pagina": 1, "item": 2 },
+            "ancora": [0.3, 0.1, 0.8],
+            "servicos": [
+              {
+                "id": "correia.inspecionar",
+                "acao": "inspecionar",
+                "descricao": "Verificar ruídos, tensão e desgaste",
+                "regras": { "todos": { "tipo": "intervalo", "km": 10000, "meses": 12 } }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "freios",
+        "nome": "Freios",
+        "componentes": [
+          {
+            "id": "fluido_freio",
+            "nome": "Fluido de freio",
+            "para_que_serve": "Transmite a força do pedal até os freios.",
+            "especificacao": null,
+            "origem": { "pagina": 1, "item": 3 },
+            "ancora": [-0.45, 0.2, 0.45],
+            "servicos": [
+              {
+                "id": "fluido_freio.inspecionar",
+                "acao": "inspecionar",
+                "descricao": "Verificar o nível e os vazamentos",
+                "regras": { "todos": { "tipo": "intervalo", "km": 10000, "meses": 12 } }
+              },
+              {
+                "id": "fluido_freio.substituir",
+                "acao": "substituir",
+                "descricao": "Substituir o fluido",
+                "regras": { "todos": { "tipo": "intervalo", "km": 40000, "meses": 24 } }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "transmissao",
+        "nome": "Transmissão",
+        "componentes": [
+          {
+            "id": "oleo_cambio",
+            "nome": "Óleo do câmbio",
+            "para_que_serve": "Lubrifica as engrenagens do câmbio.",
+            "especificacao": null,
+            "origem": { "pagina": 2, "item": 4 },
+            "ancora": [0, -0.4, 0.15],
+            "servicos": [
+              {
+                "id": "oleo_cambio.manual",
+                "acao": "substituir",
+                "descricao": "Substituir o óleo do câmbio manual",
+                "quando": { "transmissao": "manual" },
+                "regras": {
+                  "normal": { "tipo": "marcos", "km": [40000, 80000, 120000] },
+                  "severo": { "tipo": "condicional", "texto": "Inspecionar a cada revisão e substituir se necessário" }
+                }
+              },
+              {
+                "id": "oleo_cambio.automatica",
+                "acao": "substituir",
+                "descricao": "Substituir o óleo do câmbio automático",
+                "quando": { "transmissao": "automatica" },
+                "regras": { "todos": { "tipo": "intervalo", "km": 100000, "meses": 72 } }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "perfil": {
+    "uso": "normal",
+    "opcoes": {}
+  },
+  "checks": {
+    "registros": []
+  },
+  "aparencia": {
+    "tema": "claro"
+  }
+}

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-xWtmUPvg1/wYZs/ZavvoeZeskRBAEsAuFlYyjiAlhIw='; style-src-elem 'self'; style-src-attr 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eef0f3">
+<title>OBD Auto Check</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="estilo.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<div id="palco"><canvas id="canvas3d" aria-label="Modelo 3D do veículo"></canvas></div>
+<div id="chamadas" aria-hidden="true"></div>
+
+<header class="topo">
+  <div class="topo-carro"><strong id="nomeCarro"></strong><span id="anoCarro"></span></div>
+  <div class="topo-dir">
+    <span class="selo-demo" id="seloSimulador" hidden>Simulador</span>
+    <span class="topo-item" id="topoAdaptador" role="status"></span>
+    <span class="topo-item" id="topoVeiculo" role="status"></span>
+    <button class="btn btn-topo" id="btnReiniciarConexao" type="button" hidden>Reconectar</button>
+  </div>
+</header>
+
+<main>
+  <section id="tela-inicio" class="tela" aria-label="Início">
+    <ul class="indicadores" id="indicadores"></ul>
+    <form class="pedido-km" id="pedidoKm" hidden>
+      <label for="kmPedido">Quanto marca o hodômetro agora?</label>
+      <div class="linha-km">
+        <input id="kmPedido" type="number" inputmode="numeric" min="0" autocomplete="off" aria-describedby="erroPedido">
+        <span>km</span>
+      </div>
+      <p class="erro-km" id="erroPedido" role="alert"></p>
+      <div class="acoes">
+        <button class="btn btn-forte" type="submit">Salvar</button>
+        <button class="btn" type="button" id="btnDispensarKm">Agora não</button>
+      </div>
+    </form>
+    <dl class="resumo" id="resumo"></dl>
+  </section>
+
+  <section id="tela-manutencao" class="tela painel tela-larga" aria-label="Manutenção" hidden>
+    <div class="painel-cab manut-cab">
+      <div>
+        <h1>Manutenção</h1>
+        <p id="manutResumo" role="status"></p>
+      </div>
+      <div id="manutProgresso"></div>
+    </div>
+    <div id="manutTopo"></div>
+    <div class="tv-legenda" id="manutLegenda" hidden></div>
+    <div class="arvore" id="arvore"></div>
+    <div class="barra-varios" id="barraVarios" hidden></div>
+  </section>
+
+  <section id="tela-dados" class="tela painel tela-larga" aria-label="Dados OBD" hidden>
+    <div class="painel-cab manut-cab">
+      <div>
+        <h1>Dados OBD</h1>
+        <p id="dadosResumo" role="status"></p>
+      </div>
+    </div>
+    <div id="dadosTopo"></div>
+    <div class="arvore dados-corpo" id="dadosCorpo"></div>
+  </section>
+
+  <section id="tela-config" class="tela painel painel-config" aria-label="Configurações" hidden>
+    <div class="painel-cab cab-acoes">
+      <h1>Configurações</h1>
+      <div class="acoes">
+        <button class="btn btn-forte" id="btnImportar">Importar arquivo</button>
+      </div>
+    </div>
+    <div id="avisoImport" class="aviso" hidden></div>
+    <nav class="abas" role="tablist" aria-label="Seções">
+      <button role="tab" data-aba="veiculo" aria-selected="true">Veículo</button>
+      <button role="tab" data-aba="manutencao" aria-selected="false">Manutenção</button>
+      <button role="tab" data-aba="adaptador" aria-selected="false">Adaptador</button>
+      <button role="tab" data-aba="aparencia" aria-selected="false">Aparência</button>
+      <button role="tab" data-aba="dados" aria-selected="false">Dados</button>
+    </nav>
+    <div id="abaConteudo" class="aba-conteudo"></div>
+  </section>
+</main>
+
+<nav class="doca" aria-label="Navegação">
+  <button data-tela="inicio" aria-label="Início">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15.5 6 10a3 3 0 0 1 2.8-2h6.4A3 3 0 0 1 18 10l2 5.5M4 15.5V18h3v-1.5h10V18h3v-2.5M4 15.5h16M7.5 13h.01M16.5 13h.01"/></svg>
+    <span>Início</span>
+  </button>
+  <button data-tela="manutencao" aria-label="Manutenção">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 1 5-1.2l-2.8 2.8 1.2 1.2 2.8-2.8a4 4 0 0 1-5.3 5L8 18a2 2 0 0 1-2.8-2.8l6.5-6.4a4 4 0 0 1 2.8-2.3Z"/></svg>
+    <span>Manutenção</span>
+  </button>
+  <button data-tela="dados" aria-label="Dados OBD">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg>
+    <span>Dados OBD</span>
+  </button>
+  <button data-tela="config" aria-label="Configurações">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4"/></svg>
+    <span>Configurações</span>
+  </button>
+</nav>
+
+<dialog class="folha" id="folha" aria-labelledby="folhaTitulo"></dialog>
+<div class="recado" id="recado" role="status" hidden></div>
+
+<input type="file" id="arqConfig" accept=".json,application/json" hidden>
+<input type="file" id="arqModelo" accept=".glb,model/gltf-binary" hidden>
+<script type="module" src="app.js"></script>
+</body>
+</html>

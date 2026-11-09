@@ -1,0 +1,25 @@
+# Dados pessoais: nunca publicar
+estudo_sinais_obd/
+meus_dados/
+*.config.local.json
+*.glb
+*.gltf
+*.jpg
+*.jpeg
+*.heic
+logs_obd/
+*.keystore
+*.senha
+
+# Versão de navegador, só para desenvolver, e o que o build gera
+dev/
+build/
+*.apk
+
+.venv/
+.claude/
+__pycache__/
+node_modules/
+
+# Coletas exportadas do carro
+*.csv
