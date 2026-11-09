@@ -1,7 +1,7 @@
 ## O que muda e por quê
 
 ## Como foi testado
-- [ ] `npm test`
+- [ ] `node --test "tests/*.test.mjs"`
 - [ ] Simulador
 - [ ] Carro real
 - [ ] Tablet ou celular

@@ -5,7 +5,7 @@ Para quem administra o repositório oficial. Nada aqui acontece sozinho.
 ## Antes de cada push
 
 ```bash
-npm test
+node --test "tests/*.test.mjs"
 node ferramentas/verificar_seguranca.mjs
 node ferramentas/verificar_publicacao.mjs
 git status --ignored
@@ -49,4 +49,4 @@ Para gerar localmente: `sh ferramentas/construir_apk.sh`. O script confere as pe
 
 - [ ] Rever [`docs/garantias.md`](garantias.md) e atualizar o `CONTRIBUTING.md`.
 - [ ] Definir como revisar mudanças em `AGENTS.md`, `.github/`, `app/vendor/`, nas listas de comandos e no guarda.
-- [ ] Combinar o ambiente isolado para testar código de outras pessoas. Executar `npm test` já roda o código delas.
+- [ ] Combinar o ambiente isolado para testar código de outras pessoas. Executar `node --test "tests/*.test.mjs"` já roda o código delas.

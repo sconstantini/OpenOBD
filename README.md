@@ -22,7 +22,7 @@ O LLM conduz a configuração inteira, pedindo o que precisa de você:
 | Plano de manutenção | Fotos ou PDF das páginas do plano no manual, com dados pessoais cobertos | Transcreve para o formato do app e marca o que ficou para conferir |
 | Modelo 3D do carro (opcional) | Um arquivo `.glb` do seu carro, ou nada | Confere orientação, tamanho e licença, e etiqueta marca, modelo e ano. Sem modelo, o app usa um carro genérico |
 | Adaptador OBD | Um ELM327 Bluetooth encaixado no carro | Explica o pareamento e a escolha do adaptador no app |
-| Instalação | Um tablet ou celular Android | Gera o APK e instala, se tiver acesso ao seu PC, ou explica como fazer |
+| Instalação | Um tablet ou celular Android | Gera o APK no PC e explica como levar ao aparelho: pelo `adb`, se tiver acesso ao seu PC, ou copiando o arquivo por cabo, nuvem ou mensagem e tocando nele para instalar |
 | Ponto de partida | A km atual e os comprovantes do que já foi feito | Registra os checks com data e km |
 
 O LLM não precisa da internet depois de ler o repositório, e o app nunca usa. Não envie VIN, placa nem nome: o app não precisa disso.
@@ -37,6 +37,10 @@ Precisa de JDK e Android SDK. O script não usa Gradle e não baixa nada:
 sh ferramentas/construir_apk.sh
 adb install build/obd-auto-check.apk
 ```
+
+Sem `adb`: copie `build/obd-auto-check.apk` para o aparelho por cabo, nuvem ou mensagem, abra pelo app Arquivos e toque em **Instalar**. O Android vai pedir para permitir a instalação de apps daquela origem.
+
+Enquanto não houver APK de lançamento, alguém precisa gerar o APK num PC com JDK e Android SDK. Depois de gerado, o mesmo arquivo serve para qualquer aparelho com Android 7.0 ou mais novo.
 
 ## O que o app faz
 
@@ -94,7 +98,7 @@ A parte Android (`android/`) usa só o próprio Android: Bluetooth, WebView e ar
 
 | Ferramenta | Versão | Para quê |
 |---|---|---|
-| Node.js | 22 ou mais novo | Testes, validadores e guardas. Nenhum pacote npm |
+| Node.js | 22 ou mais novo | Testes, validadores e guardas. Não precisa de npm nem de nenhum pacote |
 | JDK | 11 ou mais novo | Compilar a parte Android |
 | Android SDK | build-tools e uma plataforma; o APK pede Android 7.0 (API 24) ou mais novo e mira a API 34 | Gerar e assinar o APK, e o `adb` para instalar |
 
@@ -114,7 +118,7 @@ Comece pelo [índice](docs/README.md). O projeto **não aceita pull requests de 
 ## Testes
 
 ```bash
-npm test
+node --test "tests/*.test.mjs"
 ```
 
 ## Privacidade

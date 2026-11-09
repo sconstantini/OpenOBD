@@ -23,14 +23,14 @@ App Android de manutenção do carro, em paisagem, com visual minimalista e um c
 ## Comandos
 
 ```bash
-npm test                                     # testes, inclusive os dois guardas abaixo
+node --test "tests/*.test.mjs"                 # testes, inclusive os dois guardas abaixo
 sh ferramentas/construir_apk.sh              # gera build/obd-auto-check.apk, com JDK e Android SDK
 node ferramentas/validar.mjs arquivo.json    # valida configuração e plano
 node ferramentas/verificar_publicacao.mjs    # procura dados pessoais nos arquivos publicáveis
 node ferramentas/verificar_seguranca.mjs     # reprova rede, downloads e execução inesperada
 ```
 
-Não há dependências para instalar. Os testes só precisam de Node 22 ou mais novo. O APK não usa Gradle nem baixa nada.
+Não há dependências para instalar. Os testes só precisam de Node 22 ou mais novo, sem npm. O APK não usa Gradle nem baixa nada.
 
 ## Onde mexer
 
@@ -59,4 +59,4 @@ Veja também [`docs/arquitetura.md`](docs/arquitetura.md), [`docs/garantias.md`]
 - **Mudanças visíveis:** registre em `CHANGELOG.md`.
 - **Interface:** toque mínimo de 44 px, estado nunca só por cor, três temas e paisagem de tablet e de celular. Abra o app e confira; testes não veem o layout. Coleta de dados do carro nunca entra na interface como faixa genérica de "normal": o carro é comparado com ele mesmo.
 - **Script embutido:** ao mudar o mapa de módulos em `app/index.html`, atualize o hash na CSP.
-- **Antes de concluir:** rode `npm test` e diga com clareza o que foi testado e o que não foi, principalmente o que não passou por carro real, tablet ou APK.
+- **Antes de concluir:** rode `node --test "tests/*.test.mjs"` e diga com clareza o que foi testado e o que não foi, principalmente o que não passou por carro real, tablet ou APK.

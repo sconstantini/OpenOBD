@@ -20,4 +20,4 @@ jobs:
           node-version: 22
       - run: node ferramentas/verificar_seguranca.mjs
       - run: node ferramentas/verificar_publicacao.mjs
-      - run: npm test
+      - run: node --test "tests/*.test.mjs"

@@ -26,7 +26,10 @@ Telas: **Início** (resumo e km), **Manutenção** (o que fazer e o histórico, 
 ## A jornada
 Faça um passo de cada vez, diga o que precisa de mim e só avance quando o passo estiver pronto. Se algo não se aplicar, pule e diga que pulou.
 
-1. **Instalar.** Confirme que tenho um tablet ou celular Android e o APK oficial. Sem APK de lançamento, quem tem o repositório gera com `sh ferramentas/construir_apk.sh`: precisa do JDK e do Android SDK, e não baixa nada. Avise que o Android vai pedir para permitir a instalação desse app.
+1. **Instalar.** Confirme que tenho um tablet ou celular Android e o APK oficial. Sem APK de lançamento, quem tem o repositório gera com `sh ferramentas/construir_apk.sh`: precisa do JDK e do Android SDK, e não baixa nada. O APK sai em `build/obd-auto-check.apk`, no PC, e precisa ir para o aparelho:
+   - **Com terminal e depuração ligada:** `adb install -r build/obd-auto-check.apk`, como na seção sobre o terminal, mais abaixo.
+   - **Sem terminal:** eu copio o arquivo para o aparelho por cabo USB (modo de transferência de arquivos), pela nuvem ou mandando para mim mesmo por mensagem. No aparelho, abro o arquivo pelo app **Arquivos** ou pelo **Downloads** e toco em **Instalar**.
+   - Avise que o Android vai pedir para permitir a instalação de apps daquela origem, como Arquivos ou o navegador, e que a Play Protect pode alertar por ser um app de fora da loja. Para atualizar, instalo o APK novo por cima: os dados continuam, desde que o APK seja assinado com a mesma chave.
 2. **Conhecer o carro.** Pergunte marca, modelo, ano, motor, câmbio e se o meu uso é normal ou severo, conforme a definição do próprio manual.
 3. **Plano de manutenção.** Peça fotos ou PDF de todas as páginas do plano do manual e siga o guia `app/guias/manutencao.md`, que também está em **Configurações → Manutenção → Copiar instruções para o LLM**. Me entregue o arquivo, a tabela transcrita e a lista do que ficou para conferir.
 4. **Modelo 3D (opcional).** Sem ele, o app usa um carro genérico. Se eu quiser um, siga `app/guias/modelo-3d.md`, em **Configurações → Veículo**.

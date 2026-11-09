@@ -12,4 +12,4 @@ O servidor local e a ponte Bluetooth para PC existiam só para desenvolver, mas 
 - O guarda aceita `.java` e `.xml` só em `android/`, e um único script de shell, com regras próprias: permissões só de Bluetooth, nenhum acesso à rede, nenhuma execução de programas e as listas de comandos iguais às do app. Arquivos `.py` deixam de ser aceitos.
 
 ## Consequências
-Sem o `dev/`, quem clona o repositório testa pelo APK e por `npm test`. O app não tem mais carga automática de plano ou modelo: tudo entra por **Importar**, inclusive para o mantenedor, que assim passa pela mesma jornada de quem usa. O código continua abrindo em um navegador se alguém servir a pasta, mas sem Bluetooth e sem exportar, e isso não é suportado.
+Sem o `dev/`, quem clona o repositório testa pelo APK e por `node --test "tests/*.test.mjs"`. O app não tem mais carga automática de plano ou modelo: tudo entra por **Importar**, inclusive para o mantenedor, que assim passa pela mesma jornada de quem usa. O código continua abrindo em um navegador se alguém servir a pasta, mas sem Bluetooth e sem exportar, e isso não é suportado.

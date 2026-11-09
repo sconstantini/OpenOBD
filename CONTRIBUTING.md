@@ -11,7 +11,7 @@
 ## Para o mantenedor
 
 ```bash
-npm test
+node --test "tests/*.test.mjs"
 sh ferramentas/construir_apk.sh
 ```
 

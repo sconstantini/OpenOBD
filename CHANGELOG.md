@@ -6,6 +6,7 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 ### Adicionado
 - Projeto passa a se chamar OpenOBD. O README começa pela mensagem para colar no LLM e lista as bibliotecas e ferramentas, com versões.
+- Testes rodam com `node --test`, sem precisar do npm. A jornada explica como levar o APK ao aparelho com e sem `adb`.
 - Plano de manutenção em Sistema → Componente → Serviço, com regras por intervalo, marcos e condicionais, e variações por uso e por opção do carro.
 - Perfil do carro, checks com km e/ou data editáveis, registro de vários serviços de uma vez e opção de desfazer.
 - Tarefas calculadas, abas "Tarefas" e "Plano de manutenções" e progresso do ponto de partida.
